@@ -1,0 +1,36 @@
+@red-l: #fee5ef;
+@red-m: #f88f84;
+@green-l: #cfdfb2;
+@green-m: #b4cf88;
+@txt-white: #ffffff;
+
+.bg(@bg, @color: @txt-white) {
+	background-color: @bg;
+	color: @color;
+}
+
+.bgRed {
+	.bg(@red-l, @txt-white);
+	&:hover { .bg(@red-m); }
+}
+
+.bgGreen {
+	.bg(@green-l, @txt-white);
+	&:hover { .bg(@green-m); }
+}
+
+.css-form input.ng-invalid.ng-touched {
+	.bgRed;
+}
+
+.css-form input.ng-valid.ng-touched {
+	.bgGreen;
+}
+
+.sp {
+	transition: all linear 1s;
+}
+
+.sp.ng-hide {
+	opacity: 0;
+}

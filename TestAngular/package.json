@@ -1,0 +1,29 @@
+{
+  "name": "test-angular",
+  "private": true,
+  "version": "0.0.0",
+  "devDependencies": {
+    "bower": "^1.7.7",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-concat": "latest",
+    "gulp-connect": "latest",
+    "gulp-jscs": "^4.0.0",
+    "gulp-jshint": "^2.0.4",
+    "gulp-less": "^3.3.0",
+    "gulp-sourcemaps": "^1.9.1",
+    "gulp-uglify": "latest",
+    "gulp-util": "latest",
+    "http-server": "^0.9.0",
+    "jshint": "^2.9.4",
+    "jshint-stylish": "^2.2.1",
+    "run-sequence": "^1.2.2"
+  },
+  "scripts": {
+    "postinstall": "bower install",
+    "prestart": "npm install",
+    "start": "http-server ./src/main/web -a localhost -p 8000 -c-1",
+    "preupdate-webdriver": "npm install",
+    "update-webdriver": "webdriver-manager update"
+  }
+}

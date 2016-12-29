@@ -1,0 +1,182 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+	<link type="text/css" rel="stylesheet/less" href="../app.standard.less">
+	<link type="text/css" rel="stylesheet/less" href="../app.less">
+
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-route/angular-route.js"></script>
+    <script src="../bower_components/angular-resource/angular-resource.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.js"></script>
+    <script src="../bower_components/less/dist/less.js"></script>
+
+	<!-- <script src="./js/lib/jquery.jsonify-0.3.1.min.js"></script>  -->
+	<script src="ng.js"></script>
+	<script>
+		$(loadLogin);
+	</script>
+</head>
+<body ng-app="login.app" ng-strict-di>
+<div id="loginPanel" ng-controller="LoginController as l" class="sectionDecision" style="position: relative; top: 20px; left: 100px; width: 700px; height: 370px;">
+	<form name="fL" method="post" novalidate="novalidate" class="css-form" ng-submit="l.submitLogin(fL)">
+		<table class="tableDecision" cellspacing='1' cellpadding='3' style="position: relative; top: 0px; left: 0px; width: 700px;">
+			<tr style="height: 40px" valign="middle">
+				<td align="right" width="20%">User Id :&nbsp;</td>
+				<td align="left" width="80%">
+					<input type="text" name="login" ng-model="l.login" required xx-unique ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }" class="dashboardTxt" style="width: 200px;"/>
+					<span ng-show="fL.$submitted || fL.login.$touched">
+						<span class="sp" ng-show="fL.login.$error.required">User Id is mandatory!!</span>
+						<span class="sp" ng-show="fL.login.$pending.xxUnique">Checking... Please hold on!!</span>
+						<span class="sp" ng-show="fL.login.$error.xxUnique">Sorry, you must change your name :( !!</span>
+					</span>
+				</td>
+			</tr>
+			<tr style="height: 40px" valign="middle">
+				<td align="right">Email :&nbsp;</td>
+				<td align="left">
+					<input type="email" name="email" ng-model="l.email" required ng-model-options="{ updateOn: 'blur', debounce: { default: 500, blur: 0 } }" class="dashboardTxt" style="width: 200px;"/>
+					<span class="sp" ng-show="fL.$submitted || fL.email.$touched">
+						<span class="sp" ng-show="fL.email.$error.required">Email is mandatory!!</span>
+						<span class="sp" ng-show="fL.email.$error.email">Format should be abc@def!!</span>
+					</span>
+				</td>
+			</tr>
+			<tr style="height: 40px" valign="middle">
+				<td align="right">Age :&nbsp;</td>
+				<td align="left">
+					<input type="number" name="age" ng-model="l.age" required xx-integer min="18" max="80" class="dashboardTxt" style="width: 200px;"/>
+					<span ng-show="fL.$submitted || fL.age.$touched">
+						<span class="sp" ng-show="fL.age.$error.required">You must specify age!!</span>
+						<span class="sp" ng-show="fL.age.$error.min || fL.age.$error.max">You're a baby or too old to walk!!</span>
+						<span class="sp" ng-show="fL.age.$error.xxInteger">Do you calculate your age daily ??</span>
+					</span>
+				</td>
+			</tr>
+			<tr style="height: 40px" valign="middle">
+				<td align="right">Currency :&nbsp;</td>
+				<td align="left">
+					<select name="currency" ng-model="l.currency">
+						<option ng-repeat="c in l.CURRENCY_CODES">{{c}}</option>
+					</select>
+				</td>
+			</tr>
+			<tr style="height: 40px" valign="middle">
+				<td align="right">Numerical Value :&nbsp;</td>
+				<td align="left">
+					<span class="dashboardTxt">{{l.value() | money:l.currency}}</span>
+				</td>
+			</tr>
+			<!-- 
+			<tr style="height: 40px" valign="middle">
+				<td align="right"><input type="checkbox" name="agree" ng-model="l.agree" required/>&nbsp;I agree</td>
+				<td align="left">
+					<input type="text" ng-show="fL.agree" name="sign" ng-model="l.sign" required class="dashboardTxt" style="width: 200px;"/>
+					<span ng-show="fL.$submitted || fL.agree.$touched">
+						<span class="sp" ng-show="!fL.agree || fL.sign.$error.required">You have to agree & sign!!</span>
+					</span>
+				</td>
+			</tr>
+			 -->
+			<tr style="height: 50px" valign="bottom">
+				<td align="center" colspan="2">
+					<input type="submit" class="dashboardTxt" style="width: 150px; height: 40px" value="Login"/>
+				</td>
+			</tr>
+			<tr style="height: 40px" valign="middle">
+				<td align="center" colspan="2">
+					<a href="#" id="lNext">Next Form</a> &nbsp;&nbsp; <a href="#" id="lFgt">Forgot Password ?</a>
+				</td>
+			</tr>
+			<tr style="height: 40px" valign="middle">
+				<td align="center" colspan="2">
+					<span id="msg1" class="msgError">{{l.msg1m}}</span>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div id="fgtPanel" class="sectionDecision" style="position: relative; top: 20px; left: 400px; width: 500px; height: 220px;">
+	<form name="fgt" method="post">
+		<table class="tableDecision" cellspacing='1' cellpadding='3' style="position: relative; top: 0px; left: 0px; width: 500px;">
+			<tr style="height: 40px" valign="middle">
+				<td align="right" width="30%">User Id :&nbsp;</td>
+				<td align="left" width="70%">
+					<input type="text" name="login" class="dashboardTxt" style="width: 200px;"/>
+				</td>
+			</tr>
+			<tr style="height: 40px" valign="middle">
+				<td align="center" colspan="2">
+					<input id="bFgt" type="button" class="dashboardTxt" style="width: 150px; height: 40px" value="Send Pwd"/>
+				</td>
+			</tr>
+			<tr style="height: 40px" valign="middle">
+				<td align="center" colspan="2">
+					<a href="#" id="lLogin">Back</a>
+				</td>
+			</tr>
+			<tr style="height: 40px" valign="middle">
+				<td align="center" colspan="2">
+					<span id="msg2" class="msgError"></span>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div id="loginPanel2" ng-controller="LoginController" class="sectionDecision" style="position: relative; top: 20px; left: 400px; width: 500px; height: 320px;">
+	<form name="fLogin2" method="post" action="loggedinjq.jsp" novalidate="novalidate" class="css-form">
+		<table class="tableDecision" cellspacing='1' cellpadding='3' style="position: relative; top: 0px; left: 0px; width: 500px;">
+			<tr style="height: 40px" valign="middle">
+				<td align="right" width="30%">User Id :&nbsp;</td>
+				<td align="left" width="70%">
+					<input type="text" name="login" ng-model="login" class="dashboardTxt" required style="width: 200px;"/>
+				</td>
+			</tr>
+			<tr style="height: 40px" valign="middle">
+				<td align="right">Password :&nbsp;</td>
+				<td align="left">
+					<input type="email" name="password" ng-model="password" class="dashboardTxt" required style="width: 200px;"/>
+				</td>
+			</tr>
+			<tr style="height: 40px" valign="middle">
+				<td align="right">Currency :&nbsp;</td>
+				<td align="left">
+					<select ng-model="currency">
+						<option ng-repeat="c in CURRENCY_CODES">{{c}}</option>
+					</select>
+				</td>
+			</tr>
+			<tr style="height: 40px" valign="middle">
+				<td align="right" width="30%">Numerical Value :&nbsp;</td>
+				<td align="left" width="70%">
+					<span class="dashboardTxt">{{value() | money:currency}}</span>
+				</td>
+			</tr>
+			<tr style="height: 40px" valign="middle">
+				<td align="right" width="30%">Disabled :&nbsp;<input type="checkbox" ng-model="isDisabled" /></td>
+				<td align="left" width="70%">
+					<button ng-attr-type="button" ng-disabled="isDisabled">Disabled</button>
+				</td>
+			</tr>
+			<tr style="height: 50px" valign="bottom">
+				<td align="center" colspan="2">
+					<input type="button" ng-click="submit()" class="dashboardTxt" style="width: 150px; height: 40px" value="Login"/>
+				</td>
+			</tr>
+			<tr style="height: 40px" valign="middle">
+				<td align="center" colspan="2">
+					<a href="#" id="lPrev">Previous Form</a>
+				</td>
+			</tr>
+			<tr style="height: 40px" valign="middle">
+				<td align="center" colspan="2">
+					<span id="msg3" class="msgError"></span>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+	
+</body>
+</html>
