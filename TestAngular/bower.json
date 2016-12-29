@@ -10,7 +10,7 @@
     "angular-route": "1.5.x",
     "bootstrap": "3.3.x",
     "jquery": "x",
-    "less": "x",
-    "toastr": "x"
+    "less": "^2.7.1",
+    "toastr": "^2.1.3"
   }
 }

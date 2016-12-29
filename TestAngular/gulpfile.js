@@ -12,7 +12,7 @@ var	dir = {
 };
 
 var path = {
-	excludes : {
+	excludes: {
 		bower: dir.src + '/bower_components/**/*.*',
 		old: dir.src + '/old/*.*',
 		phone: dir.src + '/phoneapp/**/*.*',
@@ -34,7 +34,17 @@ function buildExcludes() {
 	return paths;
 }
 
+function log(task, status) {
+	plugins.util.log('********** ' + status + ' :: ' + task + ' **********');
+}
+
 //*********************** Source & Destination paths used in Tasks ***********************//
+var flag = {
+		prod: !!plugins.util.env.prod,		//gulp --prod
+		merge: !!plugins.util.env.merge,	//gulp --merge
+		maps: !plugins.util.env.prod,		//Do not generate sourcemaps for --prod
+	};
+
 var src = {
 	js: [path.js.all].concat(buildExcludes()),
 	less: [path.less].concat(buildExcludes()),
@@ -52,17 +62,14 @@ var dest = {
 	appjs: 'app.js'
 };
 
-var flag = {
-	prod: !!plugins.util.env.prod,		//gulp --prod
-	merge: !!plugins.util.env.merge,	//gulp --merge
-	maps: !plugins.util.env.prod,		//Do not generate sourcemaps for --prod
-	clean: !plugins.util.env.clean		//gulp --clean
-};
-
 //******************************** Tasks ********************************//
 
-gulp.task('default', function() {
-	return runSequence('js', 'less', 'htm', 'images', 'bower');
+gulp.task('default', function(done) {
+	return runSequence('clean', 'js', 'less', 'htm', 'images', 'bower', function() {
+		log('default', 'END');
+		plugins.util.log('***** COMPLETED ALL DEFAULT TASKS *****');
+		done();
+	})
 });
 
 gulp.task('watch', ['default'], function() {
@@ -70,57 +77,70 @@ gulp.task('watch', ['default'], function() {
 	gulp.watch(src.less, ['less']);
 	gulp.watch(src.htm, ['htm']);
 	gulp.watch(src.images, ['images']);
-	plugins.util.log('***** STARTED WATCHING FOR SOURCE CHANGES *****');
+	plugins.util.log('***** WATCHING FOR SOURCE CHANGES *****');
+});
+
+gulp.task('clean', function() {
+	del.sync(dest.root + '/*');
+	log('clean', 'END');
 });
 
 gulp.task('bower', function() {
-	plugins.util.log('Processing bower...');
 	return gulp.src(src.bower)
-		.pipe(gulp.dest(dest.bower));
+		.pipe(gulp.dest(dest.bower)).on('end', function() {
+			log('bower', 'END');
+		});
 });
 
 gulp.task('images', function() {
-	plugins.util.log('Processing images...');
 	return gulp.src(src.images)
-		.pipe(gulp.dest(dest.images));
+		.pipe(gulp.dest(dest.images)).on('end', function() {
+			log('images', 'END');
+		});
 });
 
 gulp.task('htm', function() {
-	plugins.util.log('Processing htm...');
 	return gulp.src(src.htm)
-		.pipe(gulp.dest(dest.root));
+		.pipe(gulp.dest(dest.root)).on('end', function() {
+			log('htm', 'END');
+		});
 });
 
 gulp.task('less', function() {
-	plugins.util.log('Processing less...');
 	return gulp.src(src.less)
 		.pipe(gulpif(flag.maps, plugins.sourcemaps.init()))
 		.pipe(plugins.less())
 		.pipe(gulpif(flag.prod, plugins.cleanCss()))
 		.pipe(gulpif(flag.maps, plugins.sourcemaps.write('.')))
-		.pipe(gulp.dest(dest.root));
+		.pipe(gulp.dest(dest.root)).on('end', function() {
+			log('less', 'END');
+		});
 });
 
-gulp.task('js', function() {
-	plugins.util.log('Processing js...');
-	return runSequence('js-jshint', 'js-merge');
+gulp.task('js', function(done) {
+	return runSequence('js-jshint', 'js-merge', function() {
+		log('js', 'END');
+		done();
+	});
 });
 
 gulp.task('js-jshint', function() {
-	plugins.util.log('Processing js-jshint...');
 	return gulp.src(src.js)
 		.pipe(plugins.jshint())
 		.pipe(plugins.jshint.reporter(plugins.stylish))
 		.pipe(plugins.jscs())
-		.pipe(plugins.jscs.reporter());
+		.pipe(plugins.jscs.reporter()).on('end', function() {
+			log('js-jshint', 'END');
+		});
 });
 
 gulp.task('js-merge', function() {
-	plugins.util.log('Processing js-merge...');
 	return streamqueue({objectMode: true}, gulp.src(src.jsModules), gulp.src(src.jsOthers))
 		.pipe(gulpif((flag.maps && flag.merge), plugins.sourcemaps.init()))
 		.pipe(gulpif(flag.merge, plugins.concat(dest.appjs)))
 		.pipe(gulpif(flag.prod, plugins.uglify()))
 		.pipe(gulpif((flag.maps && flag.merge), plugins.sourcemaps.write('.')))
-		.pipe(gulp.dest(dest.root));
+		.pipe(gulp.dest(dest.root)).on('end', function() {
+			log('js-merge', 'COMPLETED');
+		});
 });
