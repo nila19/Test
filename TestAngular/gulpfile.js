@@ -5,33 +5,25 @@ var gulp = require('gulp'),
 	gulpif = require('gulp-if'),
 	plugins = require('gulp-load-plugins')();
 
-var opt = {
-	dir: {
-		src: 'src/main/webdev',
-		dest: 'src/main/webapp'
-	},
-	appjs: 'app.js',
-	flag: {
-		prod: !!plugins.util.env.prod,		//gulp --prod
-		maps: !plugins.util.env.prod,
-		merge: !!plugins.util.env.merge	//gulp --merge
-	}
+//****************************** Intermediate path variables ******************************//
+var	dir = {
+	src: 'src/main/webdev',
+	dest: 'src/main/webapp'
 };
 
 var path = {
 	excludes : {
-		bower: opt.dir.src + '/bower_components/**/*.*',
-		old: opt.dir.src + '/old/*.*',
-		phone: opt.dir.src + '/phoneapp/**/*.*',
+		bower: dir.src + '/bower_components/**/*.*',
+		old: dir.src + '/old/*.*',
+		phone: dir.src + '/phoneapp/**/*.*',
 	},
 	js: {
-		modules: opt.dir.src + '/**/*.module.js',
-		all: opt.dir.src + '/**/*.js',
-		app: opt.dir.dest + '/' + opt.appjs,
+		modules: dir.src + '/**/*.module.js',
+		all: dir.src + '/**/*.js'
 	},
-	less: opt.dir.src + '/**/*.less',
-	htm: opt.dir.src + '/**/*.htm',
-	images: opt.dir.src + '/images/**/*.*'
+	less: dir.src + '/**/*.less',
+	htm: dir.src + '/**/*.htm',
+	images: dir.src + '/images/**/*.*'
 };
 
 function buildExcludes() {
@@ -42,55 +34,71 @@ function buildExcludes() {
 	return paths;
 }
 
-var allsrc = {
+//*********************** Source & Destination paths used in Tasks ***********************//
+var src = {
 	js: [path.js.all].concat(buildExcludes()),
 	less: [path.less].concat(buildExcludes()),
 	htm: [path.htm].concat(buildExcludes()),
 	images: [path.images].concat(buildExcludes()),
+	bower: path.excludes.bower,
 	jsModules: [path.js.modules].concat(buildExcludes()),
 	jsOthers: [path.js.all].concat(buildExcludes(path.js.modules))
+};
+
+var dest = {
+	root: dir.dest,
+	images: dir.dest + '/images/',
+	bower: dir.dest + '/bower_components/',
+	appjs: 'app.js'
+};
+
+var flag = {
+	prod: !!plugins.util.env.prod,		//gulp --prod
+	merge: !!plugins.util.env.merge,	//gulp --merge
+	maps: !plugins.util.env.prod,		//Do not generate sourcemaps for --prod
+	clean: !plugins.util.env.clean		//gulp --clean
 };
 
 //******************************** Tasks ********************************//
 
 gulp.task('default', function() {
-	runSequence('js', 'less', 'htm', 'images', 'bower');
+	return runSequence('js', 'less', 'htm', 'images', 'bower');
 });
 
 gulp.task('watch', ['default'], function() {
-	plugins.util.log('***** STARTED WATCH... *****');
-	gulp.watch(allsrc.js, ['js']);
-	gulp.watch(allsrc.less, ['less']);
-	gulp.watch(allsrc.htm, ['htm']);
-	gulp.watch(allsrc.images, ['images']);
+	gulp.watch(src.js, ['js']);
+	gulp.watch(src.less, ['less']);
+	gulp.watch(src.htm, ['htm']);
+	gulp.watch(src.images, ['images']);
+	plugins.util.log('***** STARTED WATCHING FOR SOURCE CHANGES *****');
 });
 
 gulp.task('bower', function() {
 	plugins.util.log('Processing bower...');
-	return gulp.src(path.excludes.bower)
-		.pipe(gulp.dest(opt.dir.dest + '/bower_components/'));
+	return gulp.src(src.bower)
+		.pipe(gulp.dest(dest.bower));
 });
 
 gulp.task('images', function() {
 	plugins.util.log('Processing images...');
-	return gulp.src(allsrc.images)
-		.pipe(gulp.dest(opt.dir.dest + '/images/'));
+	return gulp.src(src.images)
+		.pipe(gulp.dest(dest.images));
 });
 
 gulp.task('htm', function() {
 	plugins.util.log('Processing htm...');
-	return gulp.src(allsrc.htm)
-		.pipe(gulp.dest(opt.dir.dest));
+	return gulp.src(src.htm)
+		.pipe(gulp.dest(dest.root));
 });
 
 gulp.task('less', function() {
 	plugins.util.log('Processing less...');
-	return gulp.src(allsrc.less)
-		.pipe(gulpif(opt.flag.maps, plugins.sourcemaps.init()))
+	return gulp.src(src.less)
+		.pipe(gulpif(flag.maps, plugins.sourcemaps.init()))
 		.pipe(plugins.less())
-		.pipe(gulpif(opt.flag.prod, plugins.cleanCss()))
-		.pipe(gulpif(opt.flag.maps, plugins.sourcemaps.write('.')))
-		.pipe(gulp.dest(opt.dir.dest));
+		.pipe(gulpif(flag.prod, plugins.cleanCss()))
+		.pipe(gulpif(flag.maps, plugins.sourcemaps.write('.')))
+		.pipe(gulp.dest(dest.root));
 });
 
 gulp.task('js', function() {
@@ -100,7 +108,7 @@ gulp.task('js', function() {
 
 gulp.task('js-jshint', function() {
 	plugins.util.log('Processing js-jshint...');
-	return gulp.src(allsrc.js)
+	return gulp.src(src.js)
 		.pipe(plugins.jshint())
 		.pipe(plugins.jshint.reporter(plugins.stylish))
 		.pipe(plugins.jscs())
@@ -109,10 +117,10 @@ gulp.task('js-jshint', function() {
 
 gulp.task('js-merge', function() {
 	plugins.util.log('Processing js-merge...');
-	return streamqueue({objectMode: true}, gulp.src(allsrc.jsModules), gulp.src(allsrc.jsOthers))
-		.pipe(gulpif((opt.flag.maps && opt.flag.merge), plugins.sourcemaps.init()))
-		.pipe(gulpif(opt.flag.merge, plugins.concat(opt.appjs)))
-		.pipe(gulpif(opt.flag.prod, plugins.uglify()))
-		.pipe(gulpif((opt.flag.maps && opt.flag.merge), plugins.sourcemaps.write('.')))
-		.pipe(gulp.dest(opt.dir.dest));
+	return streamqueue({objectMode: true}, gulp.src(src.jsModules), gulp.src(src.jsOthers))
+		.pipe(gulpif((flag.maps && flag.merge), plugins.sourcemaps.init()))
+		.pipe(gulpif(flag.merge, plugins.concat(dest.appjs)))
+		.pipe(gulpif(flag.prod, plugins.uglify()))
+		.pipe(gulpif((flag.maps && flag.merge), plugins.sourcemaps.write('.')))
+		.pipe(gulp.dest(dest.root));
 });
