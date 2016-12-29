@@ -18,14 +18,6 @@ var opt = {
 	}
 };
 
-var bower = {
-	src: opt.dir.src + '/bower_components/',
-	files: ['bootstrap/dist/css/bootstrap.css','jquery/dist/jquery.js','angular/angular.js',
-			'angular-route/angular-route.js','angular-resource/angular-resource.js',
-			'angular-animate/angular-animate.js','less/dist/less.js'],
-	dest: opt.dir.dest + '/bower_components/'
-};
-
 var path = {
 	excludes : {
 		bower: opt.dir.src + '/bower_components/**/*.*',
@@ -50,76 +42,77 @@ function buildExcludes() {
 	return paths;
 }
 
+var allsrc = {
+	js: [path.js.all].concat(buildExcludes()),
+	less: [path.less].concat(buildExcludes()),
+	htm: [path.htm].concat(buildExcludes()),
+	images: [path.images].concat(buildExcludes()),
+	jsModules: [path.js.modules].concat(buildExcludes()),
+	jsOthers: [path.js.all].concat(buildExcludes(path.js.modules))
+};
+
 //******************************** Tasks ********************************//
 
 gulp.task('default', function() {
-	return runSequence('js', 'css', 'htm', 'images', 'bower');
+	runSequence('js', 'less', 'htm', 'images', 'bower');
+});
+
+gulp.task('watch', ['default'], function() {
+	plugins.util.log('***** STARTED WATCH... *****');
+	gulp.watch(allsrc.js, ['js']);
+	gulp.watch(allsrc.less, ['less']);
+	gulp.watch(allsrc.htm, ['htm']);
+	gulp.watch(allsrc.images, ['images']);
 });
 
 gulp.task('bower', function() {
-	plugins.util.log('Processing all bower...');
-	bower.files.forEach(function(file) {
-		gulp.src(bower.src + file)
-		.pipe(gulp.dest(bower.dest + file));
-	});
+	plugins.util.log('Processing bower...');
+	return gulp.src(path.excludes.bower)
+		.pipe(gulp.dest(opt.dir.dest + '/bower_components/'));
 });
 
 gulp.task('images', function() {
-	plugins.util.log('Processing all images...');
-	var files = [path.images].concat(buildExcludes());
-	return gulp.src(files)
-	.pipe(gulp.dest(opt.dir.dest + '/images/'));
+	plugins.util.log('Processing images...');
+	return gulp.src(allsrc.images)
+		.pipe(gulp.dest(opt.dir.dest + '/images/'));
 });
 
 gulp.task('htm', function() {
-	plugins.util.log('Processing all htm...');
-	var files = [path.htm].concat(buildExcludes());
-	return gulp.src(files)
-	.pipe(gulp.dest(opt.dir.dest));
+	plugins.util.log('Processing htm...');
+	return gulp.src(allsrc.htm)
+		.pipe(gulp.dest(opt.dir.dest));
 });
 
-gulp.task('css', function() {
-	plugins.util.log('Processing all less...');
-	var files = [path.less].concat(buildExcludes());
-	return gulp.src(files)
-	.pipe(gulpif(opt.flag.maps, plugins.sourcemaps.init()))
-	.pipe(plugins.less())
-	.pipe(gulpif(opt.flag.prod, plugins.cleanCss()))
-	.pipe(gulpif(opt.flag.maps, plugins.sourcemaps.write('.')))
-	.pipe(gulp.dest(opt.dir.dest));
-});
-
-gulp.task('watch', function() {
-	gulp.watch(path.js.all, ['jshint']);
+gulp.task('less', function() {
+	plugins.util.log('Processing less...');
+	return gulp.src(allsrc.less)
+		.pipe(gulpif(opt.flag.maps, plugins.sourcemaps.init()))
+		.pipe(plugins.less())
+		.pipe(gulpif(opt.flag.prod, plugins.cleanCss()))
+		.pipe(gulpif(opt.flag.maps, plugins.sourcemaps.write('.')))
+		.pipe(gulp.dest(opt.dir.dest));
 });
 
 gulp.task('js', function() {
-	return runSequence('jshint', 'clean-dest', 'js-merge');
+	plugins.util.log('Processing js...');
+	return runSequence('js-jshint', 'js-merge');
 });
 
-gulp.task('jshint', function() {
-	var files = [path.js.all].concat(buildExcludes(path.js.app));
-	return gulp.src(files)
-	.pipe(plugins.jshint())
-	.pipe(plugins.jshint.reporter(plugins.stylish))
-	.pipe(plugins.jscs())
-	.pipe(plugins.jscs.reporter());
-});
-
-gulp.task('clean-dest', function() {
-	plugins.util.log('Cleaning dest app.js...');
-	return del(path.js.app);
+gulp.task('js-jshint', function() {
+	plugins.util.log('Processing js-jshint...');
+	return gulp.src(allsrc.js)
+		.pipe(plugins.jshint())
+		.pipe(plugins.jshint.reporter(plugins.stylish))
+		.pipe(plugins.jscs())
+		.pipe(plugins.jscs.reporter());
 });
 
 gulp.task('js-merge', function() {
-	plugins.util.log('Processing all js...');
-	var modules = [path.js.modules].concat(buildExcludes());
-	var others = [path.js.all].concat(buildExcludes(path.js.modules));
-
-	return streamqueue({objectMode: true}, gulp.src(modules), gulp.src(others))
-	.pipe(gulpif((opt.flag.maps && opt.flag.merge), plugins.sourcemaps.init()))
-	.pipe(gulpif(opt.flag.merge, plugins.concat(opt.appjs)))
-	.pipe(gulpif(opt.flag.prod, plugins.uglify()))
-	.pipe(gulpif((opt.flag.maps && opt.flag.merge), plugins.sourcemaps.write('.')))
-	.pipe(gulp.dest(opt.dir.dest));
+	plugins.util.log('Processing js-merge...');
+	return streamqueue({objectMode: true}, gulp.src(allsrc.jsModules), gulp.src(allsrc.jsOthers))
+		.pipe(gulpif((opt.flag.maps && opt.flag.merge), plugins.sourcemaps.init()))
+		.pipe(gulpif(opt.flag.merge, plugins.concat(opt.appjs)))
+		.pipe(gulpif(opt.flag.prod, plugins.uglify()))
+		.pipe(gulpif((opt.flag.maps && opt.flag.merge), plugins.sourcemaps.write('.')))
+		.pipe(gulp.dest(opt.dir.dest));
 });
