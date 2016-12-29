@@ -78,7 +78,7 @@
 
 /**** ./app.jquery.js ****/
 
-var LOGIN = {
+var LOGINF = {
 	hideAll: function() {
 		$('div.sectionDecision').hide();
 		//$("span.msgError").html("");
@@ -90,16 +90,16 @@ var LOGIN = {
 };
 
 function loadLogin() {
-	LOGIN.show($('div#loginPanel'));
+	LOGINF.show($('div#loginPanel'));
 
 	$('a#lFgt').click(function() {
-		LOGIN.show($('div#fgtPanel'));
+		LOGINF.show($('div#fgtPanel'));
 	});
 	$('a#lLogin, a#lPrev').click(function() {
-		LOGIN.show($('div#loginPanel'));
+		LOGINF.show($('div#loginPanel'));
 	});
 	$('a#lNext').click(function() {
-		LOGIN.show($('div#loginPanel2'));
+		LOGINF.show($('div#loginPanel2'));
 	});
 }
 
@@ -501,3 +501,5 @@ function loadLogin() {
 	}
 
 })(window.angular);
+
+//# sourceMappingURL=app.js.map
