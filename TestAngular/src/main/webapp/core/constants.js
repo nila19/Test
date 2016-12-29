@@ -10,7 +10,8 @@
 		CURRENCY_CODES: ['USD', 'INR', 'GBP', 'EUR'],
 		UIDS: ['Bala', 'Senthan', 'Jill', 'Jackie'],
 		INTEGER_REGEXP: /^\d+$/,
-		BASE_URL: './servlet',
+		BASE_URL: 'http://localhost:8080/TestWebServices/servlet',
+		//BASE_URL: './servlet',
 		URLs: {Login: '/access/in', Forget: '/access/fgt'}
 	});
 
