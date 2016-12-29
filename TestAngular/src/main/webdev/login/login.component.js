@@ -8,14 +8,14 @@
 		controller: LoginController
 	});
 
-	LoginController.$inject = ['loginService','ajaxService','CONSTANTS','$location'];
-	function LoginController(ls, as, CONSTANTS, $location) {
+	LoginController.$inject = ['loginService','ajaxService','CONSTANTS','$location','$timeout'];
+	function LoginController(ls, as, CONSTANTS, $location, $timeout) {
 		var vm = this;
 		vm.currency = 'INR';
 		vm.CURRENCY_CODES = CONSTANTS.CURRENCY_CODES;
-		vm.msg1m = 'Hi...';
 		vm.value = value;
 		vm.submitLogin = submitLogin;
+		toastr.info('Are you the 6 fingered man?', 'Hi...');
 
 		///////////////////////
 		function value() {
@@ -24,6 +24,7 @@
 
 		function submitLogin(frm) {
 			if (!frm.$valid) {
+				toastr.warning('Too smart, you!!!');
 				return;
 			}
 
@@ -37,16 +38,25 @@
 				};
 			});
 			*/
+			toastr.info('Fingers crossed!!!');
 			var data = angular.toJson(vm);
-			as.getURL('Login').save(vm, afterLogin);
+			as.getURL('Login').save(vm, loginOK, loginError);
 		}
 
-		function afterLogin(data) {
-			vm.msg1m = data.message;
+		function loginOK(data) {
+			toastr.remove();
 			if (data.code === 0) {
-				vm.msg1m = vm.msg1m + ' :: WOW!!!';
-				$location.path('/loggedin/' + vm.login);
+				toastr.success(data.message, 'Hurray, you got through!!!!!');
+				$timeout(function() {
+					$location.path('/loggedin/' + vm.login);
+				}, 1000);
+			} else {
+				toastr.error(data.message, 'Something has gone horribly wrong man!!!');
 			}
+		}
+		function loginError(resp) {
+			toastr.remove();
+			toastr.error(resp.status + ' :: ' + resp.statusText, 'Horribly wrong man!!!');
 		}
 	}
 })(window.angular);

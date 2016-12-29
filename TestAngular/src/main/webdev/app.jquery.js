@@ -24,3 +24,5 @@ function loadLogin() {
 		LOGINF.show($('div#loginPanel2'));
 	});
 }
+
+toastr.options.preventDuplicates = true;
