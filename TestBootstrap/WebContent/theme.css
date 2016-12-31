@@ -1,0 +1,51 @@
+body {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.theme-dropdown .dropdown-menu {
+  position: static;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.theme-showcase > p > .btn {
+  margin: 5px 0;
+}
+
+.theme-showcase .navbar .container {
+  width: auto;
+}
+
+.show-grid [class^=col-] {
+/*	background-color: #eee; */
+	border: 1px solid rgba(86,61,124,.2);
+	padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.bk-p {
+	height: 50px;
+	padding: 10px;
+}
+.bk-pwd {
+	width: 25%;
+}
+.bk-oth {
+	width: 25%;
+}
+
+.bk-pad {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.bk-h {
+	height: 30px;
+}
+
+.bk-lh {
+	line-height: 30px;
+}

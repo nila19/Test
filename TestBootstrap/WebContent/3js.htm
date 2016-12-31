@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Test Bootstrap</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="theme.css" rel="stylesheet">
+  </head>
+  <body>
+  
+<h1>Bootstrap Javascript!</h1>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2 col-lg-2">
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+		  Launch modal
+		</button>
+	</div>
+    <div class="col-md-2 col-lg-2">
+		<button type="button" id="SomeButton" class="btn btn-default" disabled="disabled" title="Some Button">
+		  Some button
+		</button>
+	</div>
+    <div class="col-md-2 col-lg-2">
+		<input type="text" class="form-control" placeholder="Text">
+	</div>
+    <div class="col-md-2 col-lg-6">
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Open modal for @fat</button>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-backdrop="static" data-whatever="@getbootstrap">Open modal for @getbootstrap</button>
+	</div>
+  </div>
+  <div class="row bk-pad">
+    <div class="col-md-6 col-lg-5">
+	    <ul class="nav nav-pills">
+		  <li class="active"><a href="#">Home</a></li>
+		  <li class="disabled"><a href="#">Profile</a></li>
+		  <li><a href="#">Messages <span class="badge">42</span></a></li>
+		  <li class="dropdown" id="shoppingdd">
+		  	  <a class=" dropdown-toggle" data-toggle="dropdown" href="#">Shopping <span class="caret"></span></a>
+			  <ul class="dropdown-menu">
+			    <li><a href="#">Action</a></li>
+			    <li><a href="#">Another action</a></li>
+			    <li><a href="#">Something else here</a></li>
+			    <li class="divider"></li>
+			    <li><a href="#">Separated link</a></li>
+			  </ul>
+		  </li>
+		</ul>
+		<div class="panel panel-default">
+		  <div class="panel-body">
+		    Basic panel example
+		  </div>
+		</div>
+
+	</div><!-- /.colum -->
+  </div><!-- /.row -->
+</div><!-- /.container-fluid -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+	      </div>
+	      <div class="modal-body">
+	        <p>One fine body&hellip;</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary">Save changes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="modal fade" id="exampleModal" tabindex="-1">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+	        <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+	      </div>
+	      <div class="modal-body">
+	        <form>
+	          <div class="form-group">
+	            <label for="recipient-name" class="control-label">Recipient:</label>
+	            <input type="text" class="form-control" id="recipient-name">
+	          </div>
+	          <div class="form-group">
+	            <label for="message-text" class="control-label">Message:</label>
+	            <textarea class="form-control" id="message-text"></textarea>
+	          </div>
+	        </form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary" id="button-send">Send message</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bt.js"></script>
+  </body>
+</html>

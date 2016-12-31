@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Test Bootstrap</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="theme.css" rel="stylesheet">
+  </head>
+  <body>
+    <h1>Bootstrap CSS!</h1>
+
+<div class="container-fluid">
+  <div class="row show-grid">
+	<!-- Stack the columns on mobile by making one full-width and the other half-width -->
+	<div class="row">
+	  <div class="col-xs-12 col-sm-6 col-md-8">R1C1 - xs-12 sm-6 md-8 Resize your viewport or check it out on your phone for an example. wide div gets wrapped onto a new line as one contiguous unit.</div>
+	  <div class="col-xs-6 col-sm-6 col-md-4">R1C2 - xs-6 sm-6 md-4</div>
+	</div>
+	<!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+	<div class="row">
+	  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">R2C1 - xs-12 sm-6 md-4 lg-3</div>
+	  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">R2C2 - xs-12 sm-6 md-4 lg-3</div>
+	  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">R2C3 - xs-12 sm-6 md-4 lg-3</div>
+	  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">R2C4 - xs-12 sm-6 md-4 lg-3</div>
+	  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">R2C5 - xs-12 sm-6 md-4 lg-3</div>
+	  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">R2C6 - xs-12 sm-6 md-4 lg-3</div>
+	</div>
+	<div class="row">
+	  <div class="col-sm-5 col-md-6">.col-sm-5 .col-md-6</div>
+	  <div class="col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-0">.col-sm-5 .col-sm-offset-2 .col-md-6 .col-md-offset-0</div>
+	</div>
+	
+	<div class="row">
+	  <div class="col-sm-6 col-md-5 col-lg-6">.col-sm-6 .col-md-5 .col-lg-6</div>
+	  <div class="col-sm-6 col-md-5 col-md-offset-2 col-lg-6 col-lg-offset-0">.col-sm-6 .col-md-5 .col-md-offset-2 .col-lg-6 .col-lg-offset-0</div>
+	</div>
+	<!-- Columns are always 50% wide, on mobile and desktop -->
+	<div class="row">
+	  <div class="col-xs-6">R3C1 - xs-6</div>
+	  <div class="col-xs-6">R3C2 - xs-6</div>
+	</div>
+	<div class="row">
+	  <div class="col-md-9 col-md-push-2">R4C1 - .col-md-9 .col-md-push-3</div>
+	  <div class="col-md-3 col-md-pull-4">R4C2 - .col-md-3 .col-md-pull-9</div>
+	</div>
+	<div class="row">
+	  <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3 Resize your viewport or check it out on your phone for an example.</div>
+	  <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+
+	  <!-- Add the extra clearfix for only the required viewport -->
+	  <div class="clearfix visible-sm-block"></div>
+
+	  <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+	  <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+	</div>
+  </div>
+</div>
+<BR><BR>
+<div class="container-fluid">
+	<div class="row show-grid">
+	  <div class="col-md-6">First column</div>
+	  <div class="col-md-6">Second column</div>
+	</div>
+	<div class="row show-grid">
+	  <div class="col-md-3">First column</div>
+	  <div class="col-md-3">Second column</div>
+	  <div class="col-md-3">Third column</div>
+	  <div class="col-md-3">Fourth column</div>
+	</div>
+	<div class="row">
+	  <div class="col-md-9 table-responsive">
+	  	<table class="table table-bordered table-hover">
+	  		<thead>
+	  			<tr>
+	  				<th>#</th>
+	  				<th>First Name</th>
+	  				<th>Second Name</th>
+	  				<th>Third Name</th>
+	  			</tr>
+	  		</thead>
+	  		<tbody>
+	  			<tr class="active">
+	  				<td>1</td>
+	  				<td>First Name : Bala</td>
+	  				<td>First Name : Vignesh</td>
+	  				<td>First Name : Waran</td>
+	  			</tr>
+	  			<tr>
+	  				<td>2</td>
+	  				<td class="success">Bala</td>
+	  				<td>First Name : Vignesh</td>
+	  				<td>First Name : Waran</td>
+	  			</tr>
+	  			<tr>
+	  				<td>3</td>
+	  				<td>Again..... First Name : Bala</td>
+	  				<td class="warning">Vignesh</td>
+	  				<td>Waran</td>
+	  			</tr>
+	  			<tr>
+	  				<td>4</td>
+	  				<td class="info">Bala</td>
+	  				<td>First Name : Vigneshwaran</td>
+	  				<td>First Name : Waran</td>
+	  			</tr>
+	  			<tr>
+	  				<td>5</td>
+	  				<td>First Name : Bala</td>
+	  				<td class="danger">Vignesh</td>
+	  				<td>Waran</td>
+	  			</tr>
+	  			<tr>
+	  				<td>6</td>
+	  				<td>Bala</td>
+	  				<td>Vignesh</td>
+	  				<td>Waran</td>
+	  			</tr>
+	  		</tbody>
+		</table>
+	  </div>
+	  <div class="col-md-3">Smaller column
+	  	<pre class="pre-scrollable">&lt;p&gt;Sample text here...&lt;/p&gt;  multiple lines of code. Be sure to escape any angle brackets in the code for proper rendering..  multiple lines of code. Be sure to escape any angle brackets in the code for proper rendering</pre>
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="col-md-6 col-md-offset-3">To switch directories, type <kbd>cd</kbd> followed by the name of the directory.<br>
+To edit settings, press <kbd>ctrl + ,</kbd></div>
+	</div>
+</div>
+<br>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 text-center">
+		<blockquote>
+		  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+		</blockquote>
+		</div>
+	</div>
+</div>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <strong>Parent fixed-width column</strong>
+      <div class="row">
+        <div class="col-md-6"><code>Nested column</code></div>
+        <div class="col-md-6"><mark>Nested column</mark></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4"><div class="well">Fluid ..</div></div>
+    <div class="col-md-4"><div class="well">.. and full-width ..</div></div>
+    <div class="col-md-4"><div class="well">.. example</div></div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-4 col-md-2">
+    	example
+    </div>
+    <div class="col-sm-8 col-md-6">
+		<form class="form-horizontal">
+		  <div class="form-group">
+		    <label for="exampleInputEmail3" class="col-sm-2 control-label">Email</label>
+		    <div class="col-sm-10">
+		    	<input type="email" class="form-control" size="30" id="exampleInputEmail3" placeholder="Email">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="exampleInputPassword3" class="col-sm-2 control-label">Password</label>
+		    <div class="col-sm-10">
+		    	<input type="password" class="form-control" size="15" id="exampleInputPassword3" placeholder="Password">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		  	<div class="col-sm-offset-2 col-sm-10">
+			  <input type="checkbox"> Remember me
+			  <button type="submit" class="btn btn-default">Sign in</button>
+			</div>
+		  </div>
+		</form>
+    </div>
+	<div class="clearfix visible-sm-block col-sm-4"></div>
+    <div class="col-sm-8 col-md-4">
+		<form class="form-inline">
+		  <div class="form-group form-group-lg">
+		    <label for="exampleInputAmount">Amount (in dollars)</label>
+		    <div class="input-group">
+		      <div class="input-group-addon">$</div>
+		      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+		      <div class="input-group-addon">.00</div>
+		    </div>
+		  	<button type="submit" class="btn btn-primary btn-lg">Cash</button>
+		  </div>
+		</form>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-4">
+		<form class="form-horizontal">
+		  <div class="form-group">
+			<label class="checkbox-inline">
+			  <input type="checkbox" id="inlineCheckbox1" value="option1"> 1 asdasd
+			</label>
+			<label class="checkbox-inline">
+			  <input type="checkbox" id="inlineCheckbox2" value="option2"> 2 asd
+			</label>
+			<label class="checkbox-inline">
+			  <input type="checkbox" id="inlineCheckbox3" value="option3"> 3sdsds
+			</label>
+		  </div>
+		  <div class="form-group">
+			<select class="form-control">
+			  <option>1</option>
+			  <option>2</option>
+			  <option>3</option>
+			  <option>4</option>
+			  <option>5</option>
+			</select>
+		  </div>
+		  <div class="form-group">
+			<select class="form-control" disabled="disabled">
+			  <option>1</option>
+			  <option>2</option>
+			  <option>3</option>
+			  <option>4</option>
+			  <option>5</option>
+			</select>
+			</div>
+		</form>
+		<label class="radio-inline">
+		  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 1sdsds
+		</label>
+		<label class="radio-inline">
+		  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 2sadasdasd
+		</label>
+		<label class="radio-inline">
+		  <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 3 asdasd
+		</label>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4">
+		<form>
+		  <fieldset disabled>
+		    <div class="form-group">
+		      <label for="disabledTextInput">Disabled input</label>
+		      <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input">
+		    </div>
+		    <div class="form-group">
+		      <label for="disabledSelect">Disabled select menu</label>
+		      <select id="disabledSelect" class="form-control">
+		        <option>Disabled select</option>
+		      </select>
+		    </div>
+		    <div class="checkbox">
+		      <label>
+		        <input type="checkbox"> Can't check this
+		      </label>
+		    </div>
+		    <button type="submit" class="btn btn-primary">Submit</button>
+		  </fieldset>
+		</form>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4">
+		<form>
+			<div class="form-group has-success has-feedback">
+			  <label class="control-label" for="inputSuccess2">Input with success</label>
+			  <input type="text" class="form-control" id="inputSuccess2">
+			  <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+			</div>
+			<div class="form-group has-warning has-feedback">
+			  <label class="control-label" for="inputWarning2">Input with warning</label>
+			  <input type="text" class="form-control" id="inputWarning2">
+			  <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+			</div>
+			<div class="form-group has-error has-feedback">
+			  <label class="control-label" for="inputError2">Input with error</label>
+			  <input type="text" class="form-control" id="inputError2">
+			  <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+			</div>
+			<div class="form-group has-success has-feedback">
+			  <label class="control-label" for="inputGroupSuccess1">Input group with success</label>
+			  <div class="input-group">
+			    <span class="input-group-addon">@</span>
+			    <input type="text" class="form-control" id="inputGroupSuccess1">
+			  </div>
+			  <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+			</div>
+		</form>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-6 col-md-offset-3 col-sm-offset-2">
+		<form class="form-horizontal">
+		  <div class="form-group has-success has-feedback">
+		    <label class="control-label col-sm-4" for="inputSuccess3">User Name : </label>
+		    <div class="col-sm-8">
+		      <input type="text" class="form-control input-lg" id="inputSuccess3">
+		      <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+		    </div>
+		  </div>
+		  <div class="form-group has-success has-feedback">
+		    <label class="control-label col-sm-4" for="inputGroupSuccess2">Email ID : </label>
+		    <div class="col-sm-8">
+		      <div class="input-group">
+		        <span class="input-group-addon">@</span>
+		        <input type="text" class="form-control" id="inputGroupSuccess2">
+		      </div>
+		      <span class="glyphicon glyphicon-usd form-control-feedback"></span>
+		    </div>
+		  </div>
+		</form>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-6">
+		<div class="row">
+		  <div class="col-xs-2">
+		    <input type="text" class="form-control" placeholder=".col-xs-2">
+		  </div>
+		  <div class="col-xs-5">
+		    <input type="text" class="form-control" placeholder=".col-xs-3">
+		  </div>
+		  <div class="col-xs-3">
+		    <input type="text" class="form-control" placeholder=".col-xs-4">
+		  </div>
+		</div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-2">
+		<a class="btn btn-default" href="#">Link</a>
+		<button class="btn btn-default" type="submit">Button</button>
+		<input class="btn btn-default" type="button" value="Input">
+		<input class="btn btn-default" type="submit" value="Submit">
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4">
+		<button type="button" class="btn btn-default">Default</button>
+		<button type="button" class="btn btn-primary">Primary</button>
+		<button type="button" class="btn btn-success">Success</button>
+		<button type="button" class="btn btn-info">Info</button>
+		<button type="button" class="btn btn-warning">Warning</button>
+		<button type="button" class="btn btn-danger">Danger</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4 hidden-xs hidden-sm">
+		<img src="moon.jpg" style="width: 360px; height: 270px;" class="img-responsive img-thumbnail" alt="Responsive image">
+    </div>
+    <div class="col-xs-4">
+		<p class="bg-primary bk-p">Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+		<p class="bg-success">Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+		<p class="bg-info">Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+		<p class="bg-warning">Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+		<p class="bg-danger">...</p>
+    </div>
+    <div class="col-xs-4">
+		<button type="button" class="btn btn-default">Google It <span class="glyphicon glyphicon-search"></span></button>
+		<button type="button" class="btn btn-default btn-lg">
+		  <span class="glyphicon glyphicon-star"></span> Star
+		</button>
+		<div class="alert alert-danger">
+		  <span class="glyphicon glyphicon-exclamation-sign"></span>
+		  Enter a valid email address
+		</div>
+    </div>
+  </div>
+
+
+<!-- Deemphasize a button by making it look like a link while maintaining button behavior -->
+<button type="button" class="btn btn-link">Link</button>
+
+<img alt="140x140" data-src="holder.js/140x140" class="img-thumbnail" style="width: 140px; height: 140px;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTk1MGM1NTljNCB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1OTUwYzU1OWM0Ij48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ1LjUiIHk9Ijc0LjUiPjE0MHgxNDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" data-holder-rendered="true">
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  </body>
+</html>
