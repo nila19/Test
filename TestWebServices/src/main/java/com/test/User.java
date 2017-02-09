@@ -1,7 +1,6 @@
 package com.test;
 
 import java.io.Serializable;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class User implements Serializable {
@@ -10,7 +9,17 @@ public class User implements Serializable {
 	private String login;
 	private String email;
 	private String password;
+	private int age;
 	private boolean authenticated = false;
+	
+	public User() {
+	}
+	
+	public User(String login, String email, int age) {
+		this.login = login;
+		this.email = email;
+		this.age = age;
+	}
 
 	public String getLogin() {
 		return login;
@@ -47,5 +56,13 @@ public class User implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
 	}
 }

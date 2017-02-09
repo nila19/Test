@@ -11,7 +11,7 @@
 		///////////////////////
 		function money(input, c) {
 			var out = '0';
-			if (input !== '' && !isNaN(input)) {
+			if (input !== '' && !Number.isNaN(input)) {
 				out = input * 100;
 			}
 			var currency = CONSTANTS.CURRENCY_MAP.INR;
