@@ -32,8 +32,11 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': { view: 'homepage' },
-  '/mine': 'UserController.index',
-  '/mine2': { view: 'mypg' }
+  '/': 'PageController.showHomePage',
+  'GET /signup': { view: 'signup' },
+  'POST /signup': 'UserController.signup',
+  'GET /login': { view: 'login' },
+  'PUT /login': 'UserController.login',
+  'GET /logout': 'UserController.logout'
 
 };

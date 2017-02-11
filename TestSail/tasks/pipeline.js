@@ -31,8 +31,18 @@ var jsFilesToInject = [
   // Dependencies like jQuery, or Angular are brought in here
   'js/dependencies/**/*.js',
 
+  'bower_components/jquery/dist/jquery.js',
+  'bower_components/angular/angular.js',
+  'bower_components/angular-animate/angular-animate.js',
+  'bower_components/angular-mocks/angular-mocks.js',
+  'bower_components/angular-resource/angular-resource.js',
+  'bower_components/angular-route/angular-route.js',
+  'bower_components/bootstrap/dist/js/bootstrap.js',
+  'bower_components/less/dist/less.js',
+
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
+  'js/**/*.module.js',
   'js/**/*.js'
 ];
 
@@ -83,5 +93,3 @@ module.exports.templateFilesToInject = templateFilesToInject.map(function(tplPat
   }
   return require('path').join('assets/',tplPath);
 });
-
-

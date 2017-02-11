@@ -1,55 +1,49 @@
 <!doctype html>
-<html lang="en" ng-app="app">
-  <head>
-    <meta charset="utf-8">
-    <title>Login App</title>
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="bower_components/toastr/toastr.css" />
-<!--
-	<link type="text/css" rel="stylesheet/less" href="app.less">
-	<link type="text/css" rel="stylesheet/less" href="app.standard.less">
--->
-	<link type="text/css" rel="stylesheet" href="app.css">
-	<link type="text/css" rel="stylesheet" href="app.standard.css">
+<html lang="en" ng-app="signup">
 
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/toastr/toastr.js"></script>
-<!--
-    <script src="bower_components/less/dist/less.js"></script>
--->
-<!--
-	<script src="app.js"></script>
--->
-	<script src="app.jquery.js"></script>
-    <script src="app.module.js"></script>
-    <script src="app.route.js"></script>
+<head>
+  <meta charset="utf-8">
+  <title>Signup App</title>
+  <!--STYLES-->
+  <link rel="stylesheet" href="/styles/importer.css">
+  <!--STYLES END-->
+</head>
 
-    <script src="core/core.module.js"></script>
-    <script src="core/constants.js"></script>
-    <script src="core/services.module.js"></script>
-    <script src="core/ajax.service.js"></script>
-    <script src="core/filters.module.js"></script>
-    <script src="core/money.filter.js"></script>
-    <script src="core/directives/directives.module.js"></script>
-    <script src="core/directives/xx-integer.directive.js"></script>
-    <script src="core/directives/xx-unique.directive.js"></script>
-    <script src="core/directives/xx-unique2.directive.js"></script>
-    <script src="login/login.module.js"></script>
-    <script src="login/login.service.js"></script>
-    <script src="login/login.component.js"></script>
-    <script src="forget/forget.module.js"></script>
-    <script src="forget/forget.component.js"></script>
-    <script src="loggedin/loggedin.module.js"></script>
-    <script src="loggedin/loggedin.component.js"></script>
-  </head>
+<body ng-controller="SignupController as sc">
+  <form name="frm" action="/signup" method="post">
+    <h1>This is my signup page...</h1>
+    <h2>Hello {{ sc.firstName }}!!</h2>
+    <h2>Hello {{ sc.currency }}!!</h2>
+    <br>First Name:
+    <input type="text" name="firstName" ng-model="sc.firstName">
+    <br>Last Name:
+    <input type="text" name="lastName" ng-model="sc.lastName">
+    <br>Email:
+    <input type="email" name="email" ng-model="sc.email">
+    <br>Password:
+    <input type="text" name="password" ng-model="sc.password">
+    <br>
+    <button type="submit">Add</button>
+  </form>
 
-  <body>
-	<div class="view-container">
-		<div ng-view class="view-frame"></div>
-	</div>
-  </body>
+  <!--SCRIPTS-->
+  <script src="/js/dependencies/sails.io.js"></script>
+  <script src="/bower_components/jquery/dist/jquery.js"></script>
+  <script src="/bower_components/angular/angular.js"></script>
+  <script src="/bower_components/angular-animate/angular-animate.js"></script>
+  <script src="/bower_components/angular-mocks/angular-mocks.js"></script>
+  <script src="/bower_components/angular-resource/angular-resource.js"></script>
+  <script src="/bower_components/angular-route/angular-route.js"></script>
+  <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="/bower_components/less/dist/less.js"></script>
+  <script src="/js/private/dashboard/dashboard.module.js"></script>
+  <script src="/js/public/login/login.module.js"></script>
+  <script src="/js/public/signup/signup.module.js"></script>
+  <script src="/js/private/dashboard/dashboard.component.js"></script>
+  <script src="/js/public/login/login.component.js"></script>
+  <script src="/js/public/signup/signup.component.js"></script>
+  <script src="/js/signup/signup.component.js"></script>
+  <!--SCRIPTS END-->
+</body>
+
 </html>
