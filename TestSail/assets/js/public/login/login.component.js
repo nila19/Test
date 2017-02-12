@@ -1,5 +1,3 @@
-/**** ./login/login.component.js ****/
-
 (function(angular) {
   'use strict';
 
@@ -20,7 +18,7 @@
     }
 
     function submitLogin() {
-			console.log('Logging in...');
+      console.log('Logging in...');
       vm.loading = true;
 
       $http.put('/login', {
@@ -28,8 +26,8 @@
         password: vm.password
       }).then(function ok() {
         console.log('Successfully logged in...');
-				window.location = '/';
-//        $location.path('../');
+        window.location = '/';
+        //$location.path('../');
       }).catch(function e(res) {
         if (res.status === 400 || res.status === 404) {
           console.log('Somehow got a 400/404 in login...');

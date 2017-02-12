@@ -1,19 +1,16 @@
-
 (function(angular) {
-	'use strict';
+  'use strict';
 
-	angular.module('dashboard').controller('DashboardController', DashboardController);
+  angular.module('dashboard').controller('DashboardController', DashboardController);
 
-	function DashboardController() {
-		var vm = this;
-		vm.inDashboard = inDashboard;
+  function DashboardController() {
+    var vm = this;
+    vm.inDashboard = inDashboard;
 
-		function inDashboard() {
-			console.log('Yes, Im in Dashboard..');
-		}
+    function inDashboard() {
+      console.log('Yes, Im in Dashboard..');
+    }
 
-		function logout() {
-			
-		}
-	}
+    function logout() {}
+  }
 })(window.angular);

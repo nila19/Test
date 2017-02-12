@@ -1,3 +1,5 @@
+/*global Person*/
+
 module.exports = {
   _config: {
     actions: false
@@ -11,6 +13,7 @@ module.exports = {
     });
   },
 
+  //Signup method...
   signup: function(req, res) {
     sails.log.silly('UserController.signup() ::  Trying to signup - ' + req.param('email'));
     var Passwords = require('machinepack-passwords');
@@ -31,7 +34,7 @@ module.exports = {
           password: pwd,
           lastLoggedIn: new Date()
         }, function created(err, newUser) {
-          if(err) {
+          if (err) {
             sails.log.error('UserController.signup() ::  Error in creating Person : ', err);
             // console.log('Error attributes...' + err.invalidAttributes);
             res.invalidInput();
@@ -45,26 +48,30 @@ module.exports = {
     });
   },
 
-  login: function(req, res) {
+  login: function l(req, res) {
     sails.log.silly('UserController.login() ::  Trying to login - ' + req.param('email'));
     Person.findOne({
       email: req.param('email')
     }, function usr(err, u) {
-      if(err) return res.negotiate(err);
-      if(!u) return res.notFound();
+      if (err) {
+        return res.negotiate(err);
+      }
+      if (!u) {
+        return res.notFound();
+      }
       require('machinepack-passwords').checkPassword({
         passwordAttempt: req.param('password'),
         encryptedPassword: u.password
       }).exec({
-        error: function(err) {
+        error: function e(err) {
           sails.log.error('There is some problem in the decryption...', err);
           res.negotiate(err);
         },
-        incorrect: function() {
+        incorrect: function i() {
           sails.log.info('Password does not match...');
           res.notFound();
         },
-        success: function() {
+        success: function s() {
           sails.log.silly('Password matched!!!! ...');
           req.session.me = u.id;
           res.ok();
@@ -73,11 +80,13 @@ module.exports = {
     });
   },
 
-  logout: function(req, res) {
+  logout: function l(req, res) {
     sails.log.silly('UserController.logout() ::  Trying to logout - ' + req.session.me);
     Person.findOne(req.session.me, function usr(err, u) {
-      if(err) return res.negotiate(err);
-      if(!u) {
+      if (err) {
+        return res.negotiate(err);
+      }
+      if (!u) {
         sails.log.warn('Session refers to user who does not exist...', err);
       }
       req.session.me = null;

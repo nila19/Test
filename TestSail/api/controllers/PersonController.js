@@ -1,3 +1,5 @@
+/*global Person*/
+
 module.exports = {
   findOne: function(req, resp) {
     Person.find(req.params.id).populate('contacts').exec(function(error, persons) {

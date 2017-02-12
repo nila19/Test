@@ -1,5 +1,12 @@
 {
-	"preset": "google",
-	"validateIndentation": "\t",
-	"maximumLineLength": 100
+  "preset": "google",
+  "validateIndentation": 2,
+  "maximumLineLength": 120,
+  "requireSpaceAfterKeywords": false,
+  "disallowSpacesInAnonymousFunctionExpression": {
+    "beforeOpeningRoundBrace": true
+  },
+  "disallowSpacesInFunctionExpression": {
+    "beforeOpeningRoundBrace": true
+  }
 }
