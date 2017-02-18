@@ -1,26 +1,47 @@
 {
-    "name": "TestNode",
-    "private": true,
-    "version": "0.0.0",
-    "description": "Node application",
-    "keywords": [],
-    "dependencies": {
-        "include-all": "^1.0.0",
-        "mongodb": "^2.2.22",
-        "rc": "1.0.1"
-    },
-    "scripts": {
-        "debug": "node debug app.js",
-        "start": "node app2.js"
-    },
-    "main": "app.js",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/anonymous node/sails user/testproj.git"
-    },
-    "author": "anonymous node/sails user",
-    "license": "",
-    "devDependencies": {
-        "bower": "^1.8.0"
-    }
+  "name": "TestNode",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Node application",
+  "keywords": [],
+  "dependencies": {
+    "async": "^2.1.4",
+    "blocked": "^1.2.1",
+    "body-parser": "^1.16.1",
+    "bunyan": "^1.8.5",
+    "chalk": "^1.1.3",
+    "cheerio": "^0.22.0",
+    "connect": "^3.5.1",
+    "debug": "^2.6.1",
+    "emptygif": "^0.1.1",
+    "eslint": "^3.15.0",
+    "express": "^4.14.1",
+    "include-all": "^1.0.0",
+    "look": "^0.1.3",
+    "mongodb": "^2.2.22",
+    "monk": "^4.0.0",
+    "once": "^1.4.0",
+    "rc": "1.0.1",
+    "request": "^2.79.0",
+    "socket.io": "^1.7.2"
+  },
+  "scripts": {
+    "debug": "node debug app.js",
+    "start": "nodemon server.js | bunyan"
+  },
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/anonymous node/sails user/testproj.git"
+  },
+  "author": "anonymous node/sails user",
+  "license": "",
+  "devDependencies": {
+    "bower": "^1.8.0",
+    "eslint": "^3.15.0",
+    "eslint-config-google": "^0.7.1",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.2",
+    "eslint-plugin-standard": "^2.0.1"
+  }
 }

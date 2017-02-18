@@ -1,18 +1,18 @@
-var schools = require('./schools');
-var shops = require('./shops');
-var contacts = require('./contacts');
-var http = require('http');
-var url = require('url');
+let schools = require('./schools');
+let shops = require('./shops');
+let contacts = require('./contacts');
+let http = require('http');
+let url = require('url');
 
-var respond = function(res, data) {
+let respond = function(res, data) {
   res.writeHead(200, {'Content-Type': 'text/plain'});
   res.write(JSON.stringify(data));
   res.end('\n\nHello World!!!');
 };
 
-var server = function() {
-  http.Server(function(req, res) {
-    var qry = url.parse(req.url, true).query;
+let server = function() {
+  http.createServer(function(req, res) {
+    let qry = url.parse(req.url, true).query;
     console.log('Request received for : ' + JSON.stringify(qry));
 
     switch (qry.doc ? qry.doc : '') {
