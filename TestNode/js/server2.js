@@ -9,6 +9,7 @@ let emptygif = require('emptygif');
 let blocked = require('blocked');
 let chalk = require('chalk');
 let bunyan = require('bunyan');
+let helmet = require('helmet');
 
 require('look').start();
 
@@ -42,6 +43,7 @@ require('monk')('localhost:27017/test').then((db1) => {
   log.error(err);
 });
 
+app.use(helmet());
 app.use(express.static(__dirname + '/public'));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended: false}));

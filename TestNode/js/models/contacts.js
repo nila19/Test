@@ -1,7 +1,7 @@
-var MongoClient = require('mongodb').MongoClient;
-var url = 'mongodb://localhost:27017/test';
+let MongoClient = require('mongodb').MongoClient;
+let url = 'mongodb://localhost:27017/test';
 
-var createContacts = function(db, cb) {
+let createContacts = function(db, cb) {
   db.createCollection('contacts', {'validator':
     {'$or': [{'phone': {'$type': 'string'}}, {'email': {'$regex': /@mongodb\.com$/}},
     {'status': {'$in': ['Unknown', 'Incomplete']}}]}}, function(err, r) {
@@ -10,8 +10,8 @@ var createContacts = function(db, cb) {
     }
   );
 };
-var insertContacts = function(db, cb) {
-  var contacts = db.collection('contacts');
+let insertContacts = function(db, cb) {
+  let contacts = db.collection('contacts');
   contacts.insertMany([{name: 'alpha', status: 'Unknown'}, {name: 'beta', status: 'Unknown', phone: '234-234-2344'},
     {name: 'gamma', status: 'Incomplete', email: 'gamma@mongodb.com'},
     {name: 'delta'}, {name: 'theta', phone: '234-234-2344'}], function(err, r) {
@@ -20,15 +20,15 @@ var insertContacts = function(db, cb) {
       cb();
     });
 };
-var findContacts = function(db, parm, cb) {
-  var contacts = db.collection('contacts');
+let findContacts = function(db, parm, cb) {
+  let contacts = db.collection('contacts');
   contacts.find(parm).toArray(function(err, docs) {
     console.log(docs);
     cb(docs);
   });
 };
 
-var main = function(cb) {
+let main = function(cb) {
   MongoClient.connect(url, function(err, db) {
     console.log('Connected successfully to server');
     createContacts(db, function() {
@@ -43,7 +43,7 @@ var main = function(cb) {
   });
 };
 
-var main2 = function(cb) {
+let main2 = function(cb) {
   MongoClient.connect(url, function(err, db) {
     findContacts(db, {}, function(docs) {
       db.close();
@@ -54,5 +54,5 @@ var main2 = function(cb) {
 
 module.exports = {
   main: main,
-  find: main2
+  find: main2,
 };
