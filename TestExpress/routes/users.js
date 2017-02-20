@@ -1,6 +1,6 @@
 let express = require('express');
 let router = express.Router();
-let log = require('../utils/logger');
+let log = require('../bin/logger');
 let error = require('./error');
 
 router.use(function(req, res, next) {

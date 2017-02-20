@@ -1,13 +1,15 @@
 // Coloring console messages.
 let chalk = require('chalk');
 // Bunyan logger
-let log = require('../utils/logger');
+let log = require('./logger');
 
 function onError(error, port) {
   if (error.syscall !== 'listen') {
     throw error;
   }
-  let bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
+  let bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
@@ -25,7 +27,9 @@ function onError(error, port) {
 }
 
 function onListening(port) {
-  let bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + port;
+  let bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + port;
   log.info('Listening on ' + bind);
 }
 
