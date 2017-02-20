@@ -1,0 +1,21 @@
+{
+  "rules": {
+    "max-len": [2, 120, 2],
+    "new-cap": ["error", {
+      "newIsCapExceptions": ["express"],
+      "capIsNewExceptions": ["Router"]
+    }],
+    "require-jsdoc": ["error", {
+      "require": {
+        "FunctionDeclaration": false,
+        "MethodDefinition": false,
+        "ClassDeclaration": true
+      }
+    }]
+  },
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "extends": "google"
+}
