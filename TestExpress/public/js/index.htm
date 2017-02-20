@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" ng-app="app">
+
+<head>
+  <meta charset="utf-8">
+  <title>Login App</title>
+  <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="../bower_components/toastr/toastr.css" />
+  <link type="text/css" rel="stylesheet" href="app.css">
+  <link type="text/css" rel="stylesheet" href="app.standard.css">
+
+  <script src="../bower_components/jquery/dist/jquery.js"></script>
+  <script src="../bower_components/angular/angular.js"></script>
+  <script src="../bower_components/angular-route/angular-route.js"></script>
+  <script src="../bower_components/angular-resource/angular-resource.js"></script>
+  <script src="../bower_components/angular-animate/angular-animate.js"></script>
+  <script src="../bower_components/toastr/toastr.js"></script>
+
+  <script src="app.jquery.js"></script>
+  <script src="app.module.js"></script>
+  <script src="app.route.js"></script>
+
+  <script src="core/core.module.js"></script>
+  <script src="core/constants.js"></script>
+  <script src="core/services.module.js"></script>
+  <script src="core/ajax.service.js"></script>
+  <script src="core/filters.module.js"></script>
+  <script src="core/money.filter.js"></script>
+  <script src="core/directives/directives.module.js"></script>
+  <script src="core/directives/xx-integer.directive.js"></script>
+  <script src="core/directives/xx-unique.directive.js"></script>
+  <script src="core/directives/xx-unique2.directive.js"></script>
+  <script src="login/login.module.js"></script>
+  <script src="login/login.service.js"></script>
+  <script src="login/login.component.js"></script>
+  <script src="forget/forget.module.js"></script>
+  <script src="forget/forget.component.js"></script>
+  <script src="loggedin/loggedin.module.js"></script>
+  <script src="loggedin/loggedin.component.js"></script>
+</head>
+
+<body>
+  <div class="view-container">
+    <div ng-view class="view-frame"></div>
+  </div>
+</body>
+
+</html>
