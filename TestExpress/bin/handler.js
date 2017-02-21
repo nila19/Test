@@ -1,60 +1,60 @@
-// Coloring console messages.
-let chalk = require('chalk');
-// Bunyan logger
-let log = require('./logger');
+/* eslint no-process-exit: "off"*/
 
-function onError(error, port) {
+'use strict';
+
+const onError = function onError(error, port, app) {
   if (error.syscall !== 'listen') {
     throw error;
   }
-  let bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  const bind = 'Port ' + port;
+  const log = app.locals.log;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      log.error(chalk.magenta(bind + ' requires elevated privileges'));
+      log.error(log.chalk.magenta(bind + ' requires elevated privileges'));
       process.exit(1);
       break;
     case 'EADDRINUSE':
-      log.error(chalk.magenta(bind + ' is already in use'));
+      log.error(log.chalk.magenta(bind + ' is already in use'));
       process.exit(1);
       break;
     default:
       throw error;
   }
-}
+};
 
-function onListening(port) {
-  let bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + port;
-  log.info('Listening on ' + bind);
-}
+const onListening = function onListening(port, app) {
+  const bind = 'port ' + port;
 
-function unCaught(error) {
-  log.error(chalk.magenta('** Uncaught Handler... **'));
+  app.locals.log.info('Listening on ' + bind);
+};
+
+const unCaught = function unCaught(error, app) {
+  const log = app.locals.log;
+
+  log.error(log.chalk.magenta('** Uncaught Handler... **'));
   log.error(error.stack);
   log.error(error);
 };
 
-// Normalize a port into a number, string, or false.
-function normalizePort(val) {
-  let port = parseInt(val, 10);
+// normalize a port into a number, string, or false.
+const normalizePort = function normalizePort(val) {
+  const port = parseInt(val, 10);
+
+  // named pipe
   if (isNaN(port)) {
-    // named pipe
     return val;
   }
   if (port >= 0) {
     return port;
   }
   return false;
-}
+};
 
 module.exports = {
+  normalizePort: normalizePort,
   onError: onError,
   onListening: onListening,
-  unCaught: unCaught,
-  normalizePort: normalizePort,
+  unCaught: unCaught
 };
