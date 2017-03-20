@@ -2,9 +2,9 @@
 (function (angular) {
   'use strict';
 
-  angular.module('app', ['login', 'forget', 'filters', 'directives', 'loggedin', 'chart', 'ngchart', 'ngRoute']);
+  angular.module('app2', ['ngchart', 'ngRoute']);
 
-  angular.module('app').config(['$compileProvider',
+  angular.module('app2').config(['$compileProvider',
     function ($compileProvider) {
       $compileProvider.debugInfoEnabled(false);
       $compileProvider.commentDirectivesEnabled(false);
