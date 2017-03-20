@@ -1,0 +1,21 @@
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>Bubble chart</title>
+  <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
+</head>
+
+<body ng-app="app2">
+  <br/>
+  <div ng-controller="ScatterCtrl">
+    <canvas class="chart chart-line" chart-data="data" chart-series="series" chart-labels="labels"></canvas>
+  </div>
+
+  <script src="../bower_components/chart.js/dist/Chart.js"></script>
+  <script src="../bower_components/angular/angular.js"></script>
+  <script src="../bower_components/angular-chart.js/dist/angular-chart.js"></script>
+  <script src="scatter.js"></script>
+</body>
+
+</html>

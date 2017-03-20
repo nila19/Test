@@ -1,4 +1,5 @@
 {
+  "extends": ["eslint:recommended", "google"],
   "rules": {
     "max-len": [2, 120, 2],
     "new-cap": ["error", {
@@ -28,10 +29,12 @@
     "no-useless-concat": "error",
     "one-var-declaration-per-line": ["error", "always"],
     "one-var": ["error", "never"],
-    "capitalized-comments": ["error", "never"],
+    "capitalized-comments": ["error", "never", {
+      "ignorePattern": "TODO|FIXME"
+    }],
     "prefer-destructuring": "off",
     "no-magic-numbers": ["error", {
-      "ignore": [0, 1],
+      "ignore": [0, 1, 2, 3, 4, 5, -1, 11, 31, 0.01, -0.01],
       "ignoreArrayIndexes": true,
       "enforceConst": true,
       "detectObjects": true
@@ -42,19 +45,19 @@
     "quote-props": ["error", "as-needed"],
     "object-shorthand": ["error", "never"],
     "comma-dangle": ["error", "only-multiline"],
-    "func-names": ["error", "always"],
+    "func-names": ["error", "never"],
     "no-param-reassign": "error",
-    "max-params": ["error", 5],
-    "max-statements": ["error", 15],
+    "max-params": ["error", 10],
+    "max-statements": ["error", 30],
     "prefer-arrow-callback": "off",
     "no-unused-vars": ["error", {
       "argsIgnorePattern": "next"
     }],
     "no-implicit-coercion": "error",
     "id-length": ["error", {
-      "min": 2,
+      "min": 1,
       "max": 30,
-      "exceptions": ["i", "j"]
+      "exceptions": ["i", "j", "$"]
     }],
     "no-plusplus": ["error", {
       "allowForLoopAfterthoughts": true
@@ -64,6 +67,7 @@
       "named": "never",
       "asyncArrow": "always"
     }],
+    "linebreak-style": "off",
     "no-undef": "error",
     "operator-linebreak": ["warn", "none"],
     "newline-per-chained-call": "off",
@@ -84,7 +88,8 @@
   },
   "globals": {
     "window": true,
-    "toastr": true
-  },
-  "extends": "google"
+    "toastr": true,
+    "$": true,
+    "moment": true
+  }
 }

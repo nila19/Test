@@ -3,7 +3,7 @@
 'use strict';
 
 module.exports = {
-  port: 3000,
+  port: 3300,
   dburl: 'localhost:27017/test',
   log: {
     path: 'C:\\Java\\logs\\TestExpress.log',

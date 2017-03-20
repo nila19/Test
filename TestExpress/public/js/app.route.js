@@ -1,20 +1,19 @@
 /** ** ./app.route.js ****/
 
-(function(angular) {
+(function (angular) {
   'use strict';
-
-  angular
-    .module('app')
-    .config(appRoute);
-
-  appRoute.$inject = ['$locationProvider', '$routeProvider'];
-  function appRoute($locationProvider, $routeProvider) {
+  const appRoute = function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
 
     $routeProvider
       .when('/login', {template: '<login></login>'})
       .when('/loggedin/:id', {template: '<loggedin></loggedin>'})
       .when('/forget', {template: '<forget></forget>'})
+      .when('/chart', {template: '<chart></chart>'})
+      .when('/ngchart', {template: '<ngchart></ngchart>'})
       .otherwise('/login');
-  }
+  };
+
+  angular.module('app').config(appRoute);
+  appRoute.$inject = ['$locationProvider', '$routeProvider'];
 })(window.angular);
