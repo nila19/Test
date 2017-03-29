@@ -8,15 +8,7 @@ const test = require('./TestModel')();
 const url = 'localhost:27017/test';
 let db = null;
 
-monk(url).then((db1) => {
-  db = db1;
-  console.log('Connected to database...');
-  dbReq();
-}).catch((err) => {
-  console.log(err);
-});
-
-const dbReq = function dbReq() {
+const dbReq = function () {
   test.findAll(db).then((docs) => {
     console.log('************** TEST **************...');
     console.log(JSON.stringify(docs));
@@ -37,3 +29,11 @@ const dbReq = function dbReq() {
     console.log('************** DONE USERS **************...');
   });
 };
+
+monk(url).then((db1) => {
+  db = db1;
+  console.log('Connected to database...');
+  dbReq();
+}).catch((err) => {
+  console.log(err);
+});

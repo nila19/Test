@@ -1,7 +1,7 @@
 /** ** ./loggedin/loggedin.module.js ****/
 
-(function(angular) {
+(function (angular) {
   'use strict';
 
-  angular.module('loggedin', ['core', 'services', 'ngRoute']);
+  angular.module('loggedin', ['services', 'ngRoute']);
 })(window.angular);

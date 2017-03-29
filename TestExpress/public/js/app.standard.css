@@ -1,1 +1,7 @@
-/******************************** Empty *************************************/
+.sp-dummy-std {
+  transition: all linear 1s;
+}
+
+.sp-dummy-std.ng-hide {
+  opacity: 0;
+}

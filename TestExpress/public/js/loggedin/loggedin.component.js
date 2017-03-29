@@ -1,19 +1,18 @@
 /** ** ./loggedin/loggedin.component.js ****/
 
-(function(angular) {
+(function (angular) {
   'use strict';
 
-  angular
-    .module('loggedin')
-    .component('loggedin', {
-      templateUrl: 'loggedin/loggedin.htm',
-      controller: LoggedInController,
-    });
+  const LoggedInController = function ($routeParams) {
+    const vm = this;
 
-  LoggedInController.$inject = ['ajaxService', 'CONSTANTS', '$routeParams'];
-  function LoggedInController(as, CONSTANTS, $routeParams) {
-    let vm = this;
     vm.id = $routeParams.id;
     vm.msg1m = 'Hurray you ( ' + vm.id + ' ) are in secure zone!!!';
-  }
+  };
+
+  angular.module('loggedin').component('loggedin', {
+    templateUrl: 'loggedin/loggedin.htm',
+    controller: LoggedInController,
+  });
+  LoggedInController.$inject = ['$routeParams'];
 })(window.angular);

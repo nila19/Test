@@ -1,26 +1,25 @@
 /** ** ./core/money.filter.js ****/
 
-(function(angular) {
+(function (angular) {
   'use strict';
 
-  angular
-    .module('filters')
-    .filter('money', money);
-
-  money.$inject = ['CONSTANTS'];
-  function money(CONSTANTS) {
-    return money;
-    // /////////////////////
-    function money(input, c) {
+  const money = function (CONSTANTS) {
+    const money = function (input, c) {
       let out = '0';
-      if (input !== '' && !Number.isNaN(input)) {
-        out = input * 100;
-      }
       let currency = CONSTANTS.CURRENCY_MAP.INR;
+
+      if (input !== '' && !Number.isNaN(input)) {
+        out = Number(input);
+      }
       if (CONSTANTS.CURRENCY_MAP[c]) {
         currency = CONSTANTS.CURRENCY_MAP[c];
       }
       return currency + ' ' + out;
-    }
-  }
+    };
+
+    return money;
+  };
+
+  angular.module('filters').filter('money', money);
+  money.$inject = ['CONSTANTS'];
 })(window.angular);

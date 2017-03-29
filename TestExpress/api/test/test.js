@@ -1,19 +1,13 @@
-let monk = require('monk');
-// let shop = require('./ShopModel')(); let school = require('./SchoolModel')();
-let user = require('./UserModel')();
+/* eslint no-console: "off" */
 
-let url = 'localhost:27017/test';
+const monk = require('monk');
+// let shop = require('./ShopModel')(); let school = require('./SchoolModel')();
+const user = require('./UserModel')();
+
+const url = 'localhost:27017/test';
 let db = null;
 
-monk(url).then((db1) => {
-  db = db1;
-  console.log('Connected to database...');
-  dbReq();
-}).catch((err) => {
-  console.log(err);
-});
-
-function dbReq() {
+const dbReq = function () {
   // shop.findAll(db).then((docs) => {   console.log('************** SHOPS **************...');
   // console.log(JSON.stringify(docs));   console.log('************** DONE SHOPS **************...'); });
   // shop.findCostco(db).then((docs) => {   console.log('************** COSTO **************...');
@@ -36,4 +30,12 @@ function dbReq() {
     console.log(JSON.stringify(docs));
     console.log('************** DONE USERS **************...');
   });
-}
+};
+
+monk(url).then((db1) => {
+  db = db1;
+  console.log('Connected to database...');
+  dbReq();
+}).catch((err) => {
+  console.log(err);
+});

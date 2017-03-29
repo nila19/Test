@@ -2,5 +2,5 @@
 (function (angular) {
   'use strict';
 
-  angular.module('ngchart', ['chart.js']);
+  angular.module('chart2', ['chart.js']);
 })(window.angular);

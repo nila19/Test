@@ -2,5 +2,5 @@
 (function (angular) {
   'use strict';
 
-  angular.module('login', ['core', 'services']);
+  angular.module('login', ['services']);
 })(window.angular);

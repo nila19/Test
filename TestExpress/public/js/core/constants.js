@@ -1,9 +1,9 @@
 /** ** ./core/constants.js ****/
 
-(function(angular) {
+(function (angular) {
   'use strict';
 
-  angular.module('core').constant('CONSTANTS', {
+  angular.module('services').constant('CONSTANTS', {
     ALPHA_MAP: {
       a: 1,
       b: 2,
@@ -45,7 +45,7 @@
       'Bala', 'Senthan', 'Jill', 'Jackie',
     ],
     INTEGER_REGEXP: /^\d+$/,
-    // BASE_URL: 'http://localhost:8080/TestWebServices/servlet',
+    // bASE_URL: 'http://localhost:8080/TestWebServices/servlet',
     BASE_URL: '..',
     URLs: {
       Login: '/access/in',

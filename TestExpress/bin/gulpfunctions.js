@@ -3,7 +3,7 @@
 const plugins = require('gulp-load-plugins')();
 
 //* ***************************** functions ******************************//
-const toArray = function toArray(obj) {
+const toArray = function (obj) {
   const arr = [];
 
   for (const key in obj) {
@@ -14,7 +14,7 @@ const toArray = function toArray(obj) {
   return arr;
 };
 
-const buildExcludes = function buildExcludes(...args) {
+const buildExcludes = function (...args) {
   // add the declared paths from path.public.excludes to the array.
   let paths = toArray(path.excludes);
 
@@ -30,7 +30,7 @@ const buildExcludes = function buildExcludes(...args) {
   return excludes;
 };
 
-const log = function log(msg, task) {
+const log = function (msg, task) {
   plugins.util.log('********** ' + msg + ' :: ' + (task || '') + ' **********');
 };
 

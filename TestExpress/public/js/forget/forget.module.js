@@ -1,7 +1,7 @@
 /** ** ./forget/forget.module.js ****/
 
-(function(angular) {
+(function (angular) {
   'use strict';
 
-  angular.module('forget', ['core', 'services']);
+  angular.module('forget', ['services']);
 })(window.angular);

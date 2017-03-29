@@ -6,7 +6,7 @@ const user = require('../models/UserModel')();
 const errcode = 1000;
 
 module.exports = {
-  checkLogin: function checkLogin(req, resp) {
+  checkLogin: function (req, resp) {
     let result = {
       code: errcode,
       message: 'User login failed...'
@@ -24,7 +24,7 @@ module.exports = {
       resp.json(result);
     });
   },
-  checkName: function checkName(req, resp) {
+  checkName: function (req, resp) {
     let result = {
       code: errcode,
       message: 'Check name failed...'

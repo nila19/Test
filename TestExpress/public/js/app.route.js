@@ -4,13 +4,12 @@
   'use strict';
   const appRoute = function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
-
     $routeProvider
       .when('/login', {template: '<login></login>'})
       .when('/loggedin/:id', {template: '<loggedin></loggedin>'})
       .when('/forget', {template: '<forget></forget>'})
       .when('/chart', {template: '<chart></chart>'})
-      .when('/ngchart', {template: '<ngchart></ngchart>'})
+      .when('/chart2', {template: '<chart2></chart2>'})
       .otherwise('/login');
   };
 

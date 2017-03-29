@@ -1,7 +1,7 @@
 /** ** ./core/filters.module.js ****/
 
-(function(angular) {
+(function (angular) {
   'use strict';
 
-  angular.module('filters', ['core']);
+  angular.module('filters', ['services']);
 })(window.angular);

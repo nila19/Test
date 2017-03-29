@@ -2,7 +2,7 @@
 
 (function (angular) {
   'use strict';
-  const ngChartController = function ($scope) {
+  const Chart2Controller = function ($scope) {
     $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
     $scope.series = ['Series A', 'Series B'];
     $scope.data = [
@@ -14,9 +14,9 @@
     // $scope.options = {scales: {xAxes: [{type: 'linear', position: 'bottom'}]}};
   };
 
-  angular.module('ngchart').component('ngchart', {
-    templateUrl: 'ngchart/ngchart.htm',
-    controller: ngChartController,
+  angular.module('chart2').component('chart2', {
+    templateUrl: 'chart2/chart2.htm',
+    controller: Chart2Controller,
   });
-  ngChartController.$inject = ['$scope'];
+  Chart2Controller.$inject = ['$scope'];
 })(window.angular);

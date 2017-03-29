@@ -1,0 +1,9 @@
+/* app.vendor.css */
+
+@import '../bower_components/bootstrap/dist/css/bootstrap.css';
+@import '../bower_components/toastr/toastr.css';
+@import '../theme/css/material-dashboard.css';
+@import '../theme/css/fonts.css';
+@import '../theme/css/font-awesome.min.css';
+@import '../js/app.css';
+@import '../js/app.standard.css';

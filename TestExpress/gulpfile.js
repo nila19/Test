@@ -1,61 +1,77 @@
+/* eslint no-sync: 'off'*/
+// usage of browserify (atomifyJs & atomifyCss)....
+
 'use strict';
 
 const gulp = require('gulp');
-const runSequence = require('run-sequence');
-const gulpif = require('gulp-if');
+const fs = require('fs');
+const watchify = require('watchify');
+const browserify = require('browserify');
+const atomifyJs = require('atomify-js');
+const atomifyCss = require('atomify-css');
+const stream = require('vinyl-source-stream');
+const buffer = require('vinyl-buffer');
 const plugins = require('gulp-load-plugins')();
+const _ = require('lodash');
 
-const gf = require('./bin/gulpfunctions');
-const src = gf.src;
+gulp.task('default', ['css', 'js'], function () {
+  plugins.util.log('ALL DONE...');
+});
 
-//* ******************************* tasks ********************************//
-gulp.task('default', function dft(next) {
-  return runSequence('server', 'public', function log() {
-    gf.log('default', 'END');
-    gf.log('COMPLETED ALL DEFAULT TASKS');
-    next();
+gulp.task('css', function () {
+  plugins.util.log('STARTING CSS...');
+  const customOpts = {
+    entries: ['./public/bundle/browserify.vendor.css'],
+    output: './public/bundle/browserify/browserify.vendor.css',
+    // debug: true,
+    compress: true,
+  };
+  const opts = _.assign({}, atomifyCss.opts, customOpts);
+
+  atomifyCss(opts);
+  plugins.util.log('ENDING CSS...');
+});
+
+gulp.task('js', function () {
+  plugins.util.log('STARTING JS...');
+  const customOpts = {
+    entries: ['./public/bundle/browserify.vendor.js', './public/bundle/browserify.vendor2.js'],
+    // debug: true,
+    // minify: true,
+    common: true
+  };
+  const opts = _.assign({}, atomifyJs.opts, customOpts);
+  const b = atomifyJs(opts);
+
+  atomifyJs.emitter.on('entry', function (content, bundleNm) {
+    plugins.util.log('Bundle = ' + bundleNm + ' :: ');
+    fs.writeFileSync('./public/bundle/browserify/'+ bundleNm +'.js', content.toString());
   });
+
+  return b.pipe(stream('common.js'))
+  .pipe(buffer())
+  .pipe(plugins.sourcemaps.init({loadMaps: true}))
+  // .pipe(plugins.uglify())
+  .pipe(plugins.sourcemaps.write('./'))
+  .pipe(gulp.dest('./public/bundle/browserify'));
 });
 
-gulp.task('watch', ['default'], function watch() {
-  gulp.watch(src.public.js, ['public-js']);
-  gulp.watch(src.public.less, ['public-less']);
-  gulp.watch(src.server.js, ['server-js']);
-  gulp.watch(src.server.ejs, ['server.ejs']);
-  gf.log('WATCHING FOR SOURCE CHANGES');
-});
+// using browserify, watchify
+gulp.task('browse', function () {
+  const customOpts = {
+    entries: ['./public/bundle/browserify.vendor.js', './public/bundle/browserify.vendor2.js'],
+    debug: true
+  };
+  const opts = _.assign({}, watchify.args, customOpts);
 
-gulp.task('server', function server(next) {
-  return runSequence('server-js', function log() {
-    gf.log('SERVER processing', 'COMPLETED');
-    next();
-  });
-});
-
-gulp.task('server-js', function serverjs() {
-  const pipe = gulp.src(src.server.js).pipe(plugins.eslint()).pipe(plugins.eslint.format());
-
-  return pipe.pipe(plugins.eslint.failAfterError());
-});
-
-// unused
-gulp.task('server-ejs', function serverejs() {
-  return gulp.src(src.server.ejs).pipe(plugins.ejs());
-});
-
-gulp.task('public', function pbl(next) {
-  return runSequence('public-js', 'public-less', function log() {
-    gf.log('PUBLIC processing', 'COMPLETED');
-    next();
-  });
-});
-
-gulp.task('public-js', function publicjs() {
-  const pipe = gulp.src(src.public.js).pipe(plugins.eslint()).pipe(plugins.eslint.format());
-
-  return pipe.pipe(plugins.eslint.failAfterError());
-});
-
-gulp.task('public-less', function publicless() {
-  return gulp.src(src.public.less).pipe(plugins.less()).pipe(gulpif(gf.flag.prod, plugins.cleanCss()));
+  return browserify(opts).bundle()
+  // log errors if they happen
+  .on('error', plugins.util.log.bind(plugins.util, 'Browserify Error'))
+  .pipe(stream('all.js'))
+  .pipe(buffer())
+  .pipe(plugins.sourcemaps.init({loadMaps: true})) // loads map from browserify file
+  // add transformation tasks to the pipeline here.
+  .pipe(plugins.uglify())
+  .pipe(plugins.sourcemaps.write('./')) // writes .map file
+  .pipe(gulp.dest('./public/bundle/browserify'));
 });

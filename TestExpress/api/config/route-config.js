@@ -6,7 +6,7 @@ const login = require('../routes/login-route');
 const error = require('../routes/error-route');
 
 module.exports = {
-  route: function route(app) {
+  route: function (app) {
     app.use('/', index);
     app.use('/users', users);
     app.use('/access', login);
