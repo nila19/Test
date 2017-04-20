@@ -14,24 +14,11 @@ config/local.js
 node_modules
 bower_components
 
+.settings
 .tmp
-dump.rdb
 
 lib-cov
-*.seed
-*.log
-*.out
-*.pid
-npm-debug.log
 
-*~
-*#
-.DS_STORE
-.netbeans
-nbproject
-.idea
-.node_history
-.settings
 .project
 .tern-project
 README.md
