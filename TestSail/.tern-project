@@ -3,13 +3,25 @@
   "libs": [
     "jquery"
   ],
-  "dontLoad": [
-    "node_modules"
-  ],
   "plugins": {
     "complete_strings": {
       "maxLength": 15
     },
-    "angular": {}
+    "node": {
+      "dontLoad": "",
+      "load": "",
+      "modules": ""
+    },
+    "modules": {
+      "dontLoad": "",
+      "load": "",
+      "modules": ""
+    },
+    "es_modules": {
+      
+    },
+    "angular1": {
+      
+    }
   }
 }

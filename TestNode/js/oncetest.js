@@ -4,7 +4,7 @@ function greet(name, cb) {
   // return is missing from the if statement
   // when no name is passed, the callback is called twice
   if (!name) {
-    cb('Hello anonymous');
+    cb('Hello anonymous...');
   }
   cb('Hello ' + name);
 }

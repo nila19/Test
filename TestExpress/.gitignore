@@ -1,10 +1,10 @@
 .gitignore
 
 /node_modules/
-/**/bower_components/
+/public/bower_components/
+/public/bundle/
 
 npm-debug.log
 
-.jscsrc
 .tern-project
 README.md

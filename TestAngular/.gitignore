@@ -1,0 +1,13 @@
+/build/
+/bin/
+/node_modules/
+/gradle/
+/**/bower_components/
+/src/main/webapp/
+.gradle
+.settings
+.project
+.tern-project
+.classpath
+gradlew
+gradlew.bat
