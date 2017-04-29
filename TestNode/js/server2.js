@@ -1,6 +1,6 @@
 /* jshint -W055 */
 
-let schools = require('./schools2');
+let schools = require('./models/schools2.js');
 
 // let url = require('url');
 // let connect = require('connect');
