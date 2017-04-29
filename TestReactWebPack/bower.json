@@ -1,0 +1,9 @@
+{
+  "name": "TestReact",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "react": "^15.5.4"
+  }
+}
