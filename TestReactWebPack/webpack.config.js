@@ -3,16 +3,16 @@ const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: './public/filter/filter.html',
-  filename: 'filter.html',
+  template: './public/src/index.html',
+  filename: 'index.html',
   inject: 'body'
 });
 
 module.exports = {
-  entry: path.resolve(__dirname, 'public', 'filter', 'filter.jsx'),
+  entry: path.resolve(__dirname, 'public', 'src', 'index.jsx'),
   output: {
     path: path.resolve(__dirname, 'public', 'dist'),
-    filename: 'filter.js'
+    filename: 'index.js'
   },
   module: {
     loaders: [
