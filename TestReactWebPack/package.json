@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "dev": "webpack -d --watch"
   },
   "dependencies": {
     "babel-eslint": "^7.2.3",
@@ -23,6 +24,7 @@
     "path": "^0.12.7",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-router-dom": "^4.1.1",
     "webpack": "^2.4.1",
     "webpack-dev-server": "^2.4.5"
   },

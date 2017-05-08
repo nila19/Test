@@ -3,16 +3,16 @@ const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: './public/src/index.html',
-  filename: 'index.html',
+  template: './public/src/app.html',
+  filename: 'app.html',
   inject: 'body'
 });
 
 module.exports = {
-  entry: path.resolve(__dirname, 'public', 'src', 'index.jsx'),
+  entry: path.resolve(__dirname, 'public', 'src', 'app.jsx'),
   output: {
     path: path.resolve(__dirname, 'public', 'dist'),
-    filename: 'index.js'
+    filename: 'app.js'
   },
   module: {
     loaders: [
