@@ -58,7 +58,7 @@ class RouterTest extends React.Component {
           <Route path="/topics" component={Topics} />
           <Route path="/about" component={About} />
         </div>
-      </Router >
+      </Router>
     );
   }
 }
