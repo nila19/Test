@@ -14,7 +14,7 @@ class ToDo extends React.Component {
     };
   }
 
-  handleNewToDoChange = (e) => {
+  handleNewChange = (e) => {
     this.setState({
       newTodo: e.target.value
     });
@@ -39,30 +39,34 @@ class ToDo extends React.Component {
     });
   }
 
-  handleAll = () => {
+  handleFilter = (f) => {
     this.props.dispatch({
       type: 'SET_VISIBILITY_FILTER',
-      filter: 'SHOW_ALL'
+      filter: f
     });
   };
 
-  handleOpen = () => {
-    this.props.dispatch({
-      type: 'SET_VISIBILITY_FILTER',
-      filter: 'SHOW_OPEN'
-    });
+  getFilteredTodos = (todos, filter) => {
+    switch (filter) {
+      case 'SHOW_ALL':
+        return todos;
+      case 'SHOW_COMPLETED':
+        return _.filter(todos, ['completed', true]);
+      case 'SHOW_OPEN':
+        return _.filter(todos, ['completed', false]);
+      default:
+        return todos;
+    }
   };
 
   render() {
-    console.log('Render II : ' + this.props.todos.length);
-    let filteredTodos = this.props.todos;
-    if (this.props.filter === 'SHOW_OPEN') {
-      filteredTodos = _.filter(filteredTodos, ['completed', false]);
-    }
+    const { todos, filter } = this.props;
+    console.log('Render II : ' + todos.length);
+    const filteredTodos = this.getFilteredTodos(todos, filter);
     return (
       <div className="box">
-        <AddForm newTodo={this.state.newTodo} onAdd={this.handleAdd} onNewToDoChange={this.handleNewToDoChange} />
-        <ShowWhat onClickAll={this.handleAll} onClickOpen={this.handleOpen} />
+        <AddForm newTodo={this.state.newTodo} onAdd={this.handleAdd} onNewChange={this.handleNewChange} />
+        <ShowWhat onClick={(f) => this.handleFilter(f)} filter={filter} />
         <ToDoList todoList={filteredTodos} onToDoClick={(id) => this.handleToDoClick(id)} />
       </div>
     );

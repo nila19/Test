@@ -8,7 +8,7 @@ class AddForm extends React.Component {
           <div className="column is-9">
             <div className="field">
               <div className="control">
-                <input className="input" type="text" value={this.props.newTodo} onChange={this.props.onNewToDoChange} />
+                <input className="input" type="text" value={this.props.newTodo} onChange={this.props.onNewChange} />
               </div>
             </div>
           </div>
