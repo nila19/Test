@@ -1,20 +1,21 @@
 import { connect } from 'react-redux';
 
-import addForm from '../ui/addForm.jsx';
+import Add from '../ui/Add.jsx';
+import { addToDo } from '../actions/index.jsx';
+
+const mapStateToProps = (state) => {
+  return {
+    seq: state.seq || 1
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onAdd: (id, desc) => {
-      dispatch({
-        type: 'ADD_TODO',
-        id: id,
-        desc: desc,
-        completed: false
-      });
+      dispatch(addToDo(id, desc));
     }
   };
 };
 
-const AddForm = connect(null, mapDispatchToProps)(addForm);
-
+const AddForm = connect(mapStateToProps, mapDispatchToProps)(Add);
 export default AddForm;

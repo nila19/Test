@@ -1,8 +1,8 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import ListItems from '../ui/listItems.jsx';
+import ListItems from '../ui/ListItems.jsx';
+import { toggleTodo } from '../actions/index.jsx';
 
 const getFilteredTodos = (todos, filter) => {
   switch (filter) {
@@ -25,21 +25,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onToDoClick: (id) => {
-      dispatch({
-        type: 'TOGGLE_TODO',
-        id: id
-      });
+      dispatch(toggleTodo(id));
     }
   };
 };
 
-const VisibleToDoList = connect(mapStateToProps, mapDispatchToProps)(ListItems);
-
-const ToDoList = () => (
-  <div className="pa3">
-    <p className="f3">List of todos :</p>
-    <VisibleToDoList />
-  </div>
-);
-
-export default ToDoList;
+const VisibleListItems = connect(mapStateToProps, mapDispatchToProps)(ListItems);
+export default VisibleListItems;

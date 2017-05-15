@@ -1,13 +1,13 @@
 import React from 'react';
 
-import AddForm from './AddForm.jsx';
-import ShowWhat from './ShowWhat.jsx';
-import ToDoList from './ToDoList.jsx';
+import AddForm from './container/AddForm.jsx';
+import Filters from './ui/Filters.jsx';
+import ToDoList from './ui/ToDoList.jsx';
 
 const ToDo = () => (
   <div className="box">
     <AddForm />
-    <ShowWhat />
+    <Filters />
     <ToDoList />
   </div>
 );
